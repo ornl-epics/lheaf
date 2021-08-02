@@ -1,0 +1,16 @@
+file IDEC.template
+{
+pattern {COMMS, S, TA, DN, AMI1, AMI2, AMI3}
+        {COM1, SE, SE, IDEC, SE:SE:Cryo6:AMI:LVL1.SEVR, SE:SE:Cryo6:AMI:LVL2.SEVR, SE:SE:Cryo6:AMI:LVL3.SEVR}
+        {COM2, SE2, SE2, IDEC2, SE:SE:Cryo2:AMI:LVL1.SEVR, SE:SE:Cryo2:AMI:LVL2.SEVR, SE:SE:Cryo2:AMI:LVL3.SEVR}
+
+}
+
+
+file communication.template
+{
+	pattern {S, TA, DN, COMM}
+		{SE, SE, IDEC, IP1}
+		{SE2, SE2, IDEC2, IP2}
+}
+

@@ -1,0 +1,230 @@
+#############################################################################################
+
+##SETS
+record(bo, "$(S):$(TA):$(DN):QuietBuzzer") {
+  field(DESC, "Quiet Buzzer")
+  field(DTYP, "stream")
+  field(OUT, "@IDEC.proto QuietBuzzerONOFF $(COMMS)")
+  info(archive, "Monitor, 00:01:00, VAL")
+  field(ASG,  "BEAMLINE, SAMPLEENV, IHC")
+  field(VAL, "0")
+  field(PINI, "YES")
+
+}
+
+record(bo, "$(S):$(TA):$(DN):TrigFill") {
+  field(DESC, "Trigger fill cycle")
+  field(DTYP, "stream")
+  field(OUT, "@IDEC.proto FillCycleONOFF $(COMMS)")
+  info(archive, "Monitor, 00:01:00, VAL")
+  field(ASG,  "BEAMLINE, SAMPLEENV, IHC")
+  field(VAL, "0")
+  field(PINI, "YES")
+  field (HIGH, "2")
+
+}
+
+
+record(bo, "$(S):$(TA):$(DN):RstTimers") {
+  field(DESC, "Reset Timers")
+  field(DTYP, "stream")
+  field(OUT, "@IDEC.proto setRS $(COMMS)")
+  info(archive, "Monitor, 00:01:00, VAL")
+  field(ASG,  "BEAMLINE, SAMPLEENV, IHC")
+  info(autosaveFields, "VAL")
+  field(HIGH, "0.1")
+}
+
+
+record(ao, "$(S):$(TA):$(DN):SetFT") {
+  field(DESC, "Set FT Alarm Fill Timer")
+  field(DTYP, "stream")
+  field(OUT, "@IDEC.proto setFT $(COMMS) 0")
+  info(archive, "Monitor, 00:01:00, VAL")
+  field(EGU, "Secs.")
+  field(ASG,  "BEAMLINE, SAMPLEENV, IHC")
+  info(autosaveFields, "VAL")
+}
+
+record(ao, "$(S):$(TA):$(DN):SetCT") {
+  field(DESC, "Set CT Cool Down Timer")
+  field(DTYP, "stream")
+  field(OUT, "@IDEC.proto setCT $(COMMS) 0")
+  info(archive, "Monitor, 00:01:00, VAL")
+  field(EGU, "Secs.")
+  field(ASG,  "BEAMLINE, SAMPLEENV, IHC")
+  info(autosaveFields, "VAL")
+}
+
+record(ao, "$(S):$(TA):$(DN):SetPS") {
+  field(DESC, "Set PS Timer")
+  field(DTYP, "stream")
+  field(OUT, "@IDEC.proto setPS $(COMMS) 0")
+  info(archive, "Monitor, 00:01:00, VAL")
+  field(EGU, "Secs.")
+  field(ASG,  "BEAMLINE, SAMPLEENV, IHC")
+  info(autosaveFields, "VAL")
+}
+
+record(ao, "$(S):$(TA):$(DN):SetSE") {
+  field(DESC, "Set SE Timer")
+  field(DTYP, "stream")
+  field(OUT, "@IDEC.proto setSE $(COMMS) 0")
+  info(archive, "Monitor, 00:01:00, VAL")
+  field(EGU, "Secs.")
+  field(ASG,  "BEAMLINE, SAMPLEENV, IHC")
+  info(autosaveFields, "VAL")
+}
+
+
+
+
+##GETS
+
+
+
+record(mbbiDirect, "$(S):$(TA):$(DN):Data") {
+  field(DTYP, "stream")
+  field(INP, "@IDEC.proto getDATA $(COMMS) 0")
+  field(SCAN, "I/O Intr")
+  field(NOBT, "8")
+  info(archive, "Monitor, 00:01:00, VAL")
+  field(PINI, "YES")
+}
+
+
+record(ai, "$(S):$(TA):$(DN):FT") {
+  field(DTYP, "stream")
+  field(INP, "@IDEC.proto getFT $(COMMS) 0")
+  field(SCAN, "I/O Intr")
+  info(archive, "Monitor, 00:01:00, VAL")
+  field(EGU, "Secs.")
+}
+
+
+record(ai, "$(S):$(TA):$(DN):CT") {
+  field(DTYP, "stream")
+  field(INP, "@IDEC.proto getCT $(COMMS) 0")
+  field(SCAN, "I/O Intr")
+  info(archive, "Monitor, 00:01:00, VAL")
+  field(EGU, "Secs.")
+}
+
+record(ai, "$(S):$(TA):$(DN):PS") {
+  field(DTYP, "stream")
+  field(INP, "@IDEC.proto getPS $(COMMS) 0")
+  field(SCAN, "I/O Intr")
+  info(archive, "Monitor, 00:01:00, VAL")
+  field(EGU, "Secs.")
+
+}
+
+record(ai, "$(S):$(TA):$(DN):SE") {
+  field(DTYP, "stream")
+  field(INP, "@IDEC.proto getSE $(COMMS) 0")
+  field(SCAN, "I/O Intr")
+  info(archive, "Monitor, 00:01:00, VAL")
+  field(EGU, "Secs.")
+
+}
+
+record(ai, "$(S):$(TA):$(DN):WD") {
+  field(DTYP, "stream")
+  field(INP, "@IDEC.proto getWD $(COMMS) 0")
+  field(SCAN, "I/O Intr")
+  info(archive, "Monitor, 00:01:00, VAL")
+
+}
+
+
+record(bi,  "$(S):$(TA):$(DN):CoolingValve"){
+  field (DESC, "Cooling Valve")
+  field (ZNAM, "OFF")
+  field (ONAM, "ON")
+  info(archive, "Monitor, 00:01:00, VAL")
+  field (INP, "$(S):$(TA):$(DN):Data.B0 CP")
+}
+
+record(bi,  "$(S):$(TA):$(DN):FillingValve"){
+  field (DESC, "FillingValve")
+  field (ZNAM, "OFF")
+  field (ONAM, "ON")
+  info(archive, "Monitor, 00:01:00, VAL")
+  field (INP, "$(S):$(TA):$(DN):Data.B1 CP")
+
+}
+
+record(bi,  "$(S):$(TA):$(DN):Solenoid"){
+  field (DESC, "Solenoid")
+  field (ZNAM, "OFF")
+  field (ONAM, "ON")
+  info(archive, "Monitor, 00:01:00, VAL")
+  field (INP, "$(S):$(TA):$(DN):Data.B2 CP")
+
+}
+
+record(bi,  "$(S):$(TA):$(DN):Buzzer"){
+  field (DESC, "Buzzer")
+  field (ZNAM, "OFF")
+  field (ONAM, "ON")
+  info(archive, "Monitor, 00:01:00, VAL")
+  field (INP, "$(S):$(TA):$(DN):Data.B3 CP")
+}
+
+record(bi,  "$(S):$(TA):$(DN):LineCooling"){
+  field (DESC, "LineCooling")
+  field (ZNAM, "OFF")
+  field (ONAM, "ON")
+  info(archive, "Monitor, 00:01:00, VAL")
+  field (INP, "$(S):$(TA):$(DN):Data.B4 CP")
+}
+
+record(bi,  "$(S):$(TA):$(DN):FillStopped"){
+  field (DESC, "Fill Stopped")
+  field (ZNAM, "OFF")
+  field (ONAM, "ON")
+  info(archive, "Monitor, 00:01:00, VAL")
+  field (INP, "$(S):$(TA):$(DN):Data.B5 CP")
+}
+
+record(bi,  "$(S):$(TA):$(DN):FillComplete"){
+  field (DESC, "Fill Complete")
+  field (ZNAM, "OFF")
+  field (ONAM, "ON")
+  info(archive, "Monitor, 00:01:00, VAL")
+  field (INP, "$(S):$(TA):$(DN):Data.B6 CP")
+}
+
+record(bi,  "$(S):$(TA):$(DN):Filling"){
+  field (DESC, "Filling")
+  field (ZNAM, "OFF")
+  field (ONAM, "ON")
+  info(archive, "Monitor, 00:01:00, VAL")
+  field (INP, "$(S):$(TA):$(DN):Data.B7 CP")
+}
+############################################
+record(bo, "$(S):$(TA):$(DN):AlarmDisable")
+{
+    field(DESC, "Disable Global Alarm")
+    field (ZNAM, "AlarmDisabled")
+    field (ONAM, "AlarmEnabled")
+    field (ZSV, "MINOR")
+    field (PINI, "YES")
+    field (VAL, "0")
+    info(archive, "Monitor, 00:01:00")
+}
+
+
+record(calc, "$(S):$(TA):$(DN):GlobalAlarm"){
+  field(INPA, "$(S):$(TA):$(DN):FillStopped CA NMS")
+  field(INPB, "$(S):$(TA):$(DN):Data.SEVR NMS")
+  field(INPC, "$(S):$(TA):$(DN):AlarmDisable")
+#  field(INPB, "$(AMI1) CA NMS")
+#  field(INPC, "$(AMI2) CA NMS")
+#  field(INPD, "$(AMI3) CA NMS")
+  field(CALC, "(A|B>0)&C")
+  field(SCAN, "1 second")
+  field(HIHI, "1")
+  field(HHSV, "MAJOR")
+}
+

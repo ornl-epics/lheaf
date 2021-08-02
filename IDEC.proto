@@ -1,0 +1,80 @@
+##################################################
+# General Settings
+##################################################
+
+Terminator = 0x04;
+ReplyTimeout = 1000;
+#ReadTimeout  = 1000;
+inTerminator = CR LF;
+LockTimeout  = 2000;
+###################################################
+#SET FUNCTIONS
+###################################################
+QuietBuzzerONOFF{
+   out "BB=%i";
+}
+
+FillCycleONOFF{
+   out "FF=%i";
+}
+
+
+
+setFT {
+   out "FT=%04i";
+}
+
+
+setCT {
+   out "CT=%04i";
+}
+
+setPS {
+   out "PS=%04i";
+}
+
+setSE {
+   out "SE=%04i";
+}
+
+setRS{
+   out "RS";
+}
+
+
+###################################################
+# Get functions
+###################################################
+
+# Read IDEC 
+getDATA {
+   in "D%#4d FT%*#4d CT%*#4d PS%*#4d SE%*#4d SB%*4d WD%*x";
+}
+
+getFT {
+   in "D%*i FT%#4d CT%*#4d PS%*#4d SE%*#4d SB%*4d WD%*x";
+}
+
+getCT {
+   in "D%*i FT%*#4d CT%#4d PS%*#4d SE%*#4d SB%*4d WD%*x";
+}
+
+getPS {
+   in "D%*i FT%*#4d CT%*#4d PS%#4d SE%*#4d SB%*4d WD%*x";
+}
+
+getSE {
+   in "D%*i FT%*#4d CT%*#4d PS%*#4d SE%#4d SB%*4d WD%*x";
+}
+
+
+getWD {
+   in "D%*i FT%*#4d CT%*#4d PS%*#4d SE%*#4d SB%*4d WD%x";
+}
+
+
+debugData{
+   ExtraInput= Ignore;
+   in  "%39c"
+}
+
